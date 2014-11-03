@@ -16,9 +16,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cdatabase.cpp
+    cdatabase.cpp \
+    cstudentdlg.cpp
 
 HEADERS  += mainwindow.h \
-    cdatabase.h
+    cdatabase.h \
+    cstudentdlg.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    cstudentdlg.ui

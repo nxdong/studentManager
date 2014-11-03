@@ -30,16 +30,17 @@ QString CDataBase::Login(QString id, QString password, bool bStudent)
 {
     QSqlQuery query;
     QString sql;
-    sql = "select id,password,name from studentlog where id ==" + id;
-    query.exec(sql);
     QString idGet,passGet,nameGet;
     // the bStudent value defines which table will be query.
     if(bStudent){
         sql = "select id,password,name from studentlog where id ==" + id;
+        qDebug()<<sql;
     }
     else{
-         sql = "select id,password,name from managerlog where id ==" + id;
+         sql = "select id,password,name from managerlog where id ==\""+ id +"\"";
+         qDebug()<<sql;
     }
+     query.exec(sql);
     while(query.next())//query.next()指向查找到的第一条记录，然后每次后移一条记录
     {
                idGet            = query.value(0).toString();//query.value(0)是id的值
@@ -47,12 +48,9 @@ QString CDataBase::Login(QString id, QString password, bool bStudent)
                nameGet      = query.value(2).toString();
                qDebug()<< idGet << passGet <<nameGet;//输出值
       }
+    // if username and password was right return user name
     if(password == passGet)
-    {
         return nameGet;
-    }
-    else
-    {
-        return "Error";
-    }
+    // the id or password was wrong , return string "Error"
+    return "Error";
 }

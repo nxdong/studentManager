@@ -46,6 +46,16 @@ void MainWindow::on_Login_OK_clicked()
         return;
     }
     qDebug()<<nameget;
+    if(m_bStudent)
+    {
+    CStudentDlg * pStuDlg;
+    pStuDlg = new CStudentDlg(id,m_pDB);
+    pStuDlg->show();
+    this->close();
+    }
+    else{
+        //todo:add mananger dialog
+    }
 }
 
 void MainWindow::on_Login_CANCEL_clicked()

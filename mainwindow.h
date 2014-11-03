@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include"cdatabase.h"
+#include"cstudentdlg.h"
 namespace Ui {
 class MainWindow;
 }
