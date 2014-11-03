@@ -4,7 +4,7 @@ CDataBase::CDataBase()
 {
     m_databaseName = "./studentDB/grade.db";
 }
-CDataBase::CDataBase(QString *dbname)
+CDataBase::CDataBase(QString dbname)
 {
     m_databaseName = dbname;
 }
@@ -16,8 +16,8 @@ bool CDataBase::Connect2Sqlite()
     if(!QFile::exists(m_databaseName))
     {
         QString msg;
-        msg.sprintf("%s:file didn't find,please check it!",m_databaseName);
-        QMessageBox::information(this,"Error",msg);
+        msg = m_databaseName + ":file didn't find,please check it!";
+        QMessageBox::information(NULL,"Error",msg,QMessageBox::Yes , QMessageBox::Yes);
         return false;
     }
     // if database open failed ,return false;
@@ -25,4 +25,34 @@ bool CDataBase::Connect2Sqlite()
         return false;
     // the database open successfully,return true;
     return true;
+}
+QString CDataBase::Login(QString id, QString password, bool bStudent)
+{
+    QSqlQuery query;
+    QString sql;
+    sql = "select id,password,name from studentlog where id ==" + id;
+    query.exec(sql);
+    QString idGet,passGet,nameGet;
+    // the bStudent value defines which table will be query.
+    if(bStudent){
+        sql = "select id,password,name from studentlog where id ==" + id;
+    }
+    else{
+         sql = "select id,password,name from managerlog where id ==" + id;
+    }
+    while(query.next())//query.next()指向查找到的第一条记录，然后每次后移一条记录
+    {
+               idGet            = query.value(0).toString();//query.value(0)是id的值
+               passGet       = query.value(1).toString();
+               nameGet      = query.value(2).toString();
+               qDebug()<< idGet << passGet <<nameGet;//输出值
+      }
+    if(password == passGet)
+    {
+        return nameGet;
+    }
+    else
+    {
+        return "Error";
+    }
 }
