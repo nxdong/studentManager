@@ -17,11 +17,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     cdatabase.cpp \
-    cstudentdlg.cpp
+    cstudentdlg.cpp \
+    cmanagerdlg.cpp
 
 HEADERS  += mainwindow.h \
     cdatabase.h \
-    cstudentdlg.h
+    cstudentdlg.h \
+    cmanagerdlg.h
 
 FORMS    += mainwindow.ui \
-    cstudentdlg.ui
+    cstudentdlg.ui \
+    cmanagerdlg.ui

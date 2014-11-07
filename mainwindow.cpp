@@ -9,6 +9,16 @@ MainWindow::MainWindow(QWidget *parent) :
     m_bStudent = true;  //set login user default student
     ui->radioBtn_student->setChecked(true);
     ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+    QImage* img=new QImage;
+            if(! ( img->load("./pic/img.jpg") ) ) //加载图像
+            {
+                QMessageBox::information(this,
+                                         tr("打开图像失败"),
+                                         tr("打开图像失败!"));
+                delete img;
+                return;
+            }
+            ui->img->setPixmap(QPixmap::fromImage(*img));
 }
 
 MainWindow::~MainWindow()
@@ -55,6 +65,10 @@ void MainWindow::on_Login_OK_clicked()
     }
     else{
         //todo:add mananger dialog
+        CManagerDlg *pManDlg;
+        pManDlg = new CManagerDlg(id,m_pDB);
+        pManDlg->show();
+        this->close();
     }
 }
 
