@@ -7,6 +7,7 @@
 #include <QTableView>
 #include<QMessageBox>
 #include <QSqlError>
+#include <QInputDialog>
 #include"cdatabase.h"
 namespace Ui {
 class CManagerDlg;
@@ -27,6 +28,10 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     QSqlTableModel *model;

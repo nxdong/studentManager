@@ -47,9 +47,34 @@ void CManagerDlg::on_pushButton_3_clicked()
         QMessageBox::warning(this, tr("tableModel"),tr("数据库错误: %1").arg(model->lastError().text()));
     }
         model->revertAll(); //撤销修改
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
 }
 
 void CManagerDlg::on_pushButton_clicked()
 {
     exit(0);
+}
+// sort function
+void CManagerDlg::on_pushButton_4_clicked()
+{
+    // todo:add sort function their.
+    bool ok;
+    int item = 1;
+    QString text = QInputDialog::getText(this, tr("Check sort item"), tr("1:操作系统 2:汇编语言 3:数值分析 4:计算机组成"), QLineEdit::Normal, tr("1"), &ok);
+
+    //判断
+    if(ok && !text.isEmpty())
+    {
+       item=  text.toInt();
+    }
+
+    model->setSort(item+1,Qt::DescendingOrder); //id属性，即第0列，降序排
+    model->select();
+}
+// show all grades
+void CManagerDlg::on_pushButton_5_clicked()
+{
+    model->setFilter(NULL); //根据姓名进行筛选
+    model->select();
 }
